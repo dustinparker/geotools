@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.geotools.data.Query;
+import org.opengis.feature.type.Name;
 import org.opengis.filter.expression.Expression;
 import org.opengis.filter.sort.SortBy;
 
@@ -39,18 +40,27 @@ public class JoiningQuery extends Query {
     private boolean hasIdColumn;
     
     public static class QueryJoin {
-        protected String joiningTypeName;    
-        protected Expression foreignKeyName;    
+        protected String joiningTypeName;
+        protected Name joiningTypeQName;
+        protected Expression foreignKeyName;
         protected Expression joiningKeyName;
         protected SortBy[] sortBy;
         protected List<String> ids = new ArrayList<String>(); 
-                
+
         public String getJoiningTypeName() {
             return joiningTypeName;
         }
 
         public void setJoiningTypeName(String joiningTypeName) {
             this.joiningTypeName = joiningTypeName;
+        }
+
+        public Name getJoiningTypeQName() {
+            return joiningTypeQName;
+        }
+
+        public void setJoiningTypeQName(Name joiningTypeQName) {
+            this.joiningTypeQName = joiningTypeQName;
         }
 
         public Expression getForeignKeyName() {

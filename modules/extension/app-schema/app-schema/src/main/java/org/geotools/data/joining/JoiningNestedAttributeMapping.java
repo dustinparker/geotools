@@ -152,6 +152,7 @@ public class JoiningNestedAttributeMapping extends NestedAttributeMapping {
         join.setForeignKeyName(sourceExpression);
         join.setJoiningKeyName(nestedSourceExpression);
         join.setJoiningTypeName(instance.baseTableQuery.getTypeName());
+        join.setJoiningTypeQName(featureTypeName);
         join.setSortBy(instance.baseTableQuery.getSortBy()); // incorporate order      
         FilterAttributeExtractor extractor = new FilterAttributeExtractor();
         instance.mapping.getFeatureIdExpression().accept(extractor, null);
