@@ -19,6 +19,7 @@ package org.geotools.data.joining;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.geotools.data.FeatureSource;
 import org.geotools.data.Query;
 import org.opengis.feature.type.Name;
 import org.opengis.filter.expression.Expression;
@@ -41,11 +42,11 @@ public class JoiningQuery extends Query {
     
     public static class QueryJoin {
         protected String joiningTypeName;
-        protected Name joiningTypeQName;
         protected Expression foreignKeyName;
         protected Expression joiningKeyName;
         protected SortBy[] sortBy;
-        protected List<String> ids = new ArrayList<String>(); 
+        protected List<String> ids = new ArrayList<String>();
+        private FeatureSource joiningSource;
 
         public String getJoiningTypeName() {
             return joiningTypeName;
@@ -55,12 +56,12 @@ public class JoiningQuery extends Query {
             this.joiningTypeName = joiningTypeName;
         }
 
-        public Name getJoiningTypeQName() {
-            return joiningTypeQName;
+        public void setJoiningSource(FeatureSource joiningSource) {
+            this.joiningSource = joiningSource;
         }
 
-        public void setJoiningTypeQName(Name joiningTypeQName) {
-            this.joiningTypeQName = joiningTypeQName;
+        public FeatureSource getJoiningSource() {
+            return joiningSource;
         }
 
         public Expression getForeignKeyName() {
