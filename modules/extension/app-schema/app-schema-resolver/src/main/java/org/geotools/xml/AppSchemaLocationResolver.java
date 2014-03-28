@@ -64,6 +64,10 @@ public class AppSchemaLocationResolver extends SchemaLocationResolver {
     @Override
     public String resolveSchemaLocation(final XSDSchema schema, final String uri,
             final String location) {
+        if(location == null) {
+            return null;
+        }
+
         return resolver.resolve(location, schema.getSchemaLocation());
     }
 
