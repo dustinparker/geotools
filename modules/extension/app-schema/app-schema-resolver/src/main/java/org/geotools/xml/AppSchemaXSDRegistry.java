@@ -104,6 +104,11 @@ public final class AppSchemaXSDRegistry implements XSDSchemaLocator {
     public synchronized XSDSchema locateSchema(XSDSchema xsdSchema, String namespaceURI,
             String rawSchemaLocationURI, String resolvedSchemaLocationURI) {
 
+        // This class can't do anything with null URIs
+        if(resolvedSchemaLocationURI == null) {
+            return null;
+        }
+
         if (xsdSchema != null) {
             // first see if the schema can already be found in same resource set
             // (to avoid infinite loop)
