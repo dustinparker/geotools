@@ -355,6 +355,7 @@ public class JoiningJDBCFeatureSource extends JDBCFeatureSource {
         do {
             alias = "t" + ++index;
         } while (tableNames.contains(alias));
+        tableNames.add(alias);
         return alias;
     }
     
@@ -410,7 +411,6 @@ public class JoiningJDBCFeatureSource extends JDBCFeatureSource {
                 FilterToSQL toSQL1 = createFilterToSQL(lastSource.getDataStore(), lastSource.getSchema());
                 FilterToSQL toSQL2 = createFilterToSQL(currentSource.getDataStore(), currentSource.getSchema());
 
-                tableNames.add(curTypeName);
                 String alias = createAlias(tableNames);
 
                 aliases[i] = alias;
