@@ -277,7 +277,7 @@ public class JoiningJDBCFeatureSource extends JDBCFeatureSource {
                     sort(join.getJoiningTypeName(), aliases[j], sort, orderByFields, joinOrders);
 
                     if (query.getQueryJoins().size() > j + 1) {
-                        addMultiValuedSort(join.getJoiningTypeName(), myAlias, orderByFields, query
+                        addMultiValuedSort(join.getJoiningTypeName(), aliases[j], orderByFields, query
                                 .getQueryJoins().get(j + 1), aliases[j + 1], joinOrders);
                     }
                 }
