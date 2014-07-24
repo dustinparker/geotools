@@ -201,8 +201,16 @@ public class SchemaIndexImpl implements SchemaIndex {
             synchronized (this) {
                 if (children == null) {
                     children = new ListOrderedMap();
+                    XSDTypeDefinition type = parent.getType();
+                    if(type.getSchema() == null) {
+                        QName typeName = new QName(type.getTargetNamespace(), type.getName());
+                        XSDTypeDefinition newType = getTypeDefinition(typeName);
+                        if(newType != null) {
+                            type = newType;
+                        }
+                    }
 
-                    for (Iterator i = Schemas.getChildElementParticles(parent.getType(), true)
+                    for (Iterator i = Schemas.getChildElementParticles(type, true)
                                              .iterator(); i.hasNext();) {
                         XSDParticle particle = (XSDParticle) i.next();
                         XSDElementDeclaration child = (XSDElementDeclaration) particle.getContent();
@@ -217,8 +225,8 @@ public class SchemaIndexImpl implements SchemaIndex {
                             childName = new QName(child.getTargetNamespace(), child.getName());
                         } else if (parent.getTargetNamespace() != null) {
                             childName = new QName(parent.getTargetNamespace(), child.getName());
-                        } else if (parent.getType().getTargetNamespace() != null) {
-                            childName = new QName(parent.getType().getTargetNamespace(),
+                        } else if (type.getTargetNamespace() != null) {
+                            childName = new QName(type.getTargetNamespace(),
                                     child.getName());
                         } else {
                             childName = new QName(null, child.getName());
